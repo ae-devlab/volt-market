@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Моето табло · VoltMarket</title>
+  </head>
+  <body>
+    <div id="site-nav"></div>
+    <main class="container py-4">
+      <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+        <h3 class="fw-bold mb-0"><i class="bi bi-grid text-primary me-1"></i>Моето табло</h3>
+        <a href="/sell.html" class="btn btn-primary"><i class="bi bi-plus-circle me-1"></i>Нова обява</a>
+      </div>
+
+      <ul class="nav nav-tabs mb-4" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="tab-listings" data-bs-toggle="tab" data-bs-target="#pane-listings" type="button" role="tab">
+            <i class="bi bi-card-list me-1"></i>Моите обяви
+          </button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="nav-link" id="tab-favorites" data-bs-toggle="tab" data-bs-target="#pane-favorites" type="button" role="tab">
+            <i class="bi bi-heart me-1"></i>Любими
+          </button>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane fade show active" id="pane-listings" role="tabpanel">
+          <div id="listings-loading" class="text-center py-5"><div class="spinner-border text-primary"></div></div>
+          <div id="my-listings" class="row g-3"></div>
+          <div id="listings-empty" class="empty-state d-none">
+            <i class="bi bi-card-list d-block mb-2"></i>
+            Още нямаш обяви. <a href="/sell.html">Публикувай първата си обява</a>.
+          </div>
+        </div>
+        <div class="tab-pane fade" id="pane-favorites" role="tabpanel">
+          <div id="favorites-loading" class="text-center py-5"><div class="spinner-border text-primary"></div></div>
+          <div id="my-favorites" class="row g-3"></div>
+          <div id="favorites-empty" class="empty-state d-none">
+            <i class="bi bi-heart d-block mb-2"></i>
+            Нямаш запазени обяви.
+          </div>
+        </div>
+      </div>
+    </main>
+    <div id="site-footer"></div>
+    <script type="module" src="/src/pages/dashboard.js"></script>
+  </body>
+</html>
