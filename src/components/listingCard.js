@@ -61,9 +61,9 @@ export function listingCard(listing, { favorite = false, onFavorite = null, show
     el('h6', { class: 'card-title fw-semibold text-truncate mb-1' }, listing.title),
     el('div', { class: 'text-muted small mb-2' }, [listing.brand, listing.model].filter(Boolean).join(' ') || ' '),
     specs,
-    el('div', { class: 'mt-auto d-flex justify-content-between align-items-center' },
-      el('span', { class: 'fw-bold fs-5 text-primary' }, formatPrice(listing.price)),
-      el('span', { class: 'small text-muted' }, el('i', { class: 'bi bi-geo-alt me-1' }), listing.location || '—')),
+    el('div', { class: 'mt-auto pt-2' },
+      el('div', { class: 'fw-bold fs-5 text-primary lh-1' }, formatPrice(listing.price)),
+      el('div', { class: 'small text-muted mt-1' }, el('i', { class: 'bi bi-geo-alt me-1' }), listing.location || '—')),
   )
 
   const imgWrap = el('div', { class: 'position-relative' }, img, statusBadge, favBtn)
