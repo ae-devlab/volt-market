@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="VoltMarket — пазар за електрически автомобили. Купи и продай електромобил." />
+    <title>VoltMarket — Пазар за електрически автомобили</title>
+  </head>
+  <body>
+    <div id="site-nav"></div>
+    <main>
+      <section class="vm-hero py-5">
+        <div class="container">
+          <div class="row align-items-center g-4">
+            <div class="col-lg-7">
+              <h1 class="display-5 fw-bold">
+                <i class="bi bi-lightning-charge-fill text-warning"></i>
+                Купи или продай <span class="text-primary">електромобил</span>
+              </h1>
+              <p class="lead">
+                Обяви само за електрически автомобили — филтрирай по батерия, пробег и обхват с едно зареждане.
+              </p>
+              <a href="/sell.html" class="btn btn-primary btn-lg">
+                <i class="bi bi-plus-circle me-1"></i>Публикувай обява
+              </a>
+            </div>
+            <div class="col-lg-5">
+              <form id="search-form" class="card card-body shadow">
+                <label class="form-label fw-semibold text-body">Търсене</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="bi bi-search"></i></span>
+                  <input type="search" id="search-input" class="form-control" placeholder="напр. Tesla Model 3" />
+                  <button class="btn btn-primary" type="submit">Търси</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container py-4">
+        <div class="row g-4">
+          <aside class="col-lg-3">
+            <form id="filters" class="card card-body shadow-sm sticky-lg-top" style="top: 84px">
+              <h6 class="fw-bold mb-3"><i class="bi bi-funnel me-1"></i>Филтри</h6>
+              <div class="mb-3">
+                <label class="form-label small" for="f-category">Категория</label>
+                <select id="f-category" class="form-select form-select-sm">
+                  <option value="">Всички</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small" for="f-condition">Състояние</label>
+                <select id="f-condition" class="form-select form-select-sm">
+                  <option value="">Всички</option>
+                  <option value="new">Нов</option>
+                  <option value="used">Употребяван</option>
+                </select>
+              </div>
+              <div class="row g-2 mb-3">
+                <div class="col">
+                  <label class="form-label small" for="f-min-price">Цена от</label>
+                  <input type="number" id="f-min-price" class="form-control form-control-sm" min="0" />
+                </div>
+                <div class="col">
+                  <label class="form-label small" for="f-max-price">до</label>
+                  <input type="number" id="f-max-price" class="form-control form-control-sm" min="0" />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small" for="f-min-range">Мин. обхват (км)</label>
+                <input type="number" id="f-min-range" class="form-control form-control-sm" min="0" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label small" for="f-sort">Подреди</label>
+                <select id="f-sort" class="form-select form-select-sm">
+                  <option value="newest">Най-нови</option>
+                  <option value="price_asc">Цена ↑</option>
+                  <option value="price_desc">Цена ↓</option>
+                  <option value="range_desc">Обхват ↓</option>
+                </select>
+              </div>
+              <button class="btn btn-primary btn-sm" type="submit">Приложи</button>
+              <button class="btn btn-link btn-sm mt-1" type="button" id="clear-filters">Изчисти филтрите</button>
+            </form>
+          </aside>
+
+          <div class="col-lg-9">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="mb-0" id="results-count">Обяви</h5>
+            </div>
+            <div id="loading" class="text-center py-5">
+              <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Зареждане…</span></div>
+            </div>
+            <div id="results" class="row g-3"></div>
+            <div id="empty" class="empty-state d-none">
+              <i class="bi bi-inbox d-block mb-2"></i>
+              Няма намерени обяви по тези критерии.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div id="site-footer"></div>
+    <script type="module" src="/src/pages/home.js"></script>
+  </body>
+</html>
