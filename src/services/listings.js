@@ -1,5 +1,5 @@
 import { supabase } from '../lib/supabaseClient.js'
-import { getPublicUrl, uploadListingImages, removeListingImageFile } from './storage.js'
+import { getPublicUrl, uploadListingImages, removeListingImageFile, removeListingImageFiles } from './storage.js'
 
 const LIST_SELECT = `
   id, title, brand, model, year, price, mileage_km, battery_capacity_kwh, range_km,
@@ -86,9 +86,19 @@ export async function create(payload, imageFiles = []) {
   if (error) throw error
 
   if (imageFiles.length) {
-    const rows = await uploadListingImages(imageFiles, listing.id, user.id, { firstIsPrimary: true })
-    const { error: imgError } = await supabase.from('listing_images').insert(rows)
-    if (imgError) throw imgError
+    let rows = []
+    try {
+      rows = await uploadListingImages(imageFiles, listing.id, user.id, { firstIsPrimary: true })
+      const { error: imgError } = await supabase.from('listing_images').insert(rows)
+      if (imgError) throw imgError
+    } catch (uploadErr) {
+      // roll back so a failed upload never leaves a phantom listing or orphaned files
+      try { await supabase.from('listings').delete().eq('id', listing.id) } catch { /* best effort */ }
+      if (rows.length) {
+        try { await removeListingImageFiles(rows.map((r) => r.storage_path)) } catch { /* best effort */ }
+      }
+      throw uploadErr
+    }
   }
   return listing
 }
@@ -99,17 +109,20 @@ export async function update(id, patch) {
   return data
 }
 
-export async function addImages(id, imageFiles, { hasExisting = true } = {}) {
+export async function addImages(id, imageFiles) {
   if (!imageFiles?.length) return []
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) throw new Error('Трябва да си влязъл.')
+  // Use the LIVE image count as the single source of truth (avoids a stale caller flag):
+  // the newly added image becomes primary only when the listing currently has none.
   const { count } = await supabase
     .from('listing_images')
     .select('id', { count: 'exact', head: true })
     .eq('listing_id', id)
+  const existing = count || 0
   const rows = await uploadListingImages(imageFiles, id, user.id, {
-    startOrder: count || 0,
-    firstIsPrimary: !hasExisting && !count,
+    startOrder: existing,
+    firstIsPrimary: existing === 0,
   })
   const { data, error } = await supabase.from('listing_images').insert(rows).select()
   if (error) throw error
@@ -127,8 +140,14 @@ export async function removeImage(image) {
 }
 
 export async function remove(id) {
+  // fetch the image paths first so we can free the storage objects after the row is gone
+  const { data: imgs } = await supabase.from('listing_images').select('storage_path').eq('listing_id', id)
   const { error } = await supabase.from('listings').delete().eq('id', id)
   if (error) throw error
+  const paths = (imgs || []).map((i) => i.storage_path)
+  if (paths.length) {
+    try { await removeListingImageFiles(paths) } catch { /* best effort — row already deleted */ }
+  }
 }
 
 // --- Admin / moderation (page is guarded; RLS lets admins see & change all) ---

@@ -3,14 +3,14 @@ import { onReady, qs, getParam } from '../utils/dom.js'
 import { renderNavbar } from '../components/navbar.js'
 import { renderFooter } from '../components/footer.js'
 import { login } from '../services/auth.js'
-import { redirectIfAuth } from '../utils/guards.js'
+import { redirectIfAuth, safeNext } from '../utils/guards.js'
 import { friendlyError } from '../utils/errors.js'
 
 onReady(async () => {
   renderNavbar()
   renderFooter()
 
-  const next = getParam('next') || '/dashboard.html'
+  const next = safeNext(getParam('next'))
   await redirectIfAuth(next)
 
   const form = qs('#login-form')

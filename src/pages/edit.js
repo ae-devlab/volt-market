@@ -106,7 +106,7 @@ onReady(async () => {
     try {
       await update(id, payload)
       const files = uploader.getFiles()
-      if (files.length) await addImages(id, files, { hasExisting: listing.images.length > 0 })
+      if (files.length) await addImages(id, files)
       showToast('Промените са запазени.', 'success')
       setTimeout(() => (location.href = '/dashboard.html'), 800)
     } catch (err) {
