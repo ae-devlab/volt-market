@@ -60,6 +60,8 @@ async function loadResults() {
   try {
     const items = await listApproved(currentFilters())
     qs('#results-count').textContent = `${items.length} ${items.length === 1 ? 'обява' : 'обяви'}`
+    const stat = qs('#stat-count')
+    if (stat) stat.textContent = items.length
     if (!items.length) {
       empty.classList.remove('d-none')
       return
