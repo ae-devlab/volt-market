@@ -23,6 +23,7 @@
 
 /* Tie Bootstrap's dark theme to our palette */
 [data-bs-theme='dark'] {
+  color-scheme: dark;
   --bs-body-bg: var(--vm-ink);
   --bs-body-color: var(--vm-text);
   --bs-border-color: var(--vm-line);
@@ -157,6 +158,13 @@ h1, h2, h3, h4, h5, h6,
   background: rgba(255, 255, 255, 0.04);
   border-color: var(--vm-line);
   color: var(--vm-muted);
+}
+/* Native <select> popup list — force a solid dark background so every option is
+   readable (the translucent field background made the option list render white-on-white). */
+.form-select option,
+.form-select optgroup {
+  background-color: #131b25;
+  color: var(--vm-text);
 }
 
 /* ---------- Hero ---------- */
