@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Редакция на обява · VoltMarket</title>
+  </head>
+  <body>
+    <div id="site-nav"></div>
+    <main class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h3 class="fw-bold mb-1"><i class="bi bi-pencil-square text-primary me-1"></i>Редакция на обява</h3>
+          <p class="text-muted">Промени детайлите на обявата си.</p>
+          <div id="error" class="alert alert-danger d-none" role="alert"></div>
+          <div id="loading" class="text-center py-5">
+            <div class="spinner-border text-primary" role="status"></div>
+          </div>
+
+          <form id="listing-form" class="card card-body shadow-sm d-none" novalidate>
+            <div class="mb-3">
+              <label class="form-label" for="title">Заглавие *</label>
+              <input type="text" id="title" class="form-control" required />
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="category">Категория *</label>
+                <select id="category" class="form-select" required></select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="condition">Състояние</label>
+                <select id="condition" class="form-select">
+                  <option value="used">Употребяван</option>
+                  <option value="new">Нов</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="brand">Марка</label>
+                <input type="text" id="brand" class="form-control" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="model">Модел</label>
+                <input type="text" id="model" class="form-control" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="year">Година</label>
+                <input type="number" id="year" class="form-control" min="1990" max="2030" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="price">Цена (лв.) *</label>
+                <input type="number" id="price" class="form-control" min="0" required />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="mileage">Пробег (км)</label>
+                <input type="number" id="mileage" class="form-control" min="0" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="battery">Батерия (kWh)</label>
+                <input type="number" id="battery" class="form-control" min="0" step="0.1" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="range">Обхват (км)</label>
+                <input type="number" id="range" class="form-control" min="0" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="location">Локация</label>
+                <input type="text" id="location" class="form-control" />
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="description">Описание</label>
+                <textarea id="description" class="form-control" rows="4"></textarea>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Текущи снимки</label>
+                <div id="existing-images" class="d-flex flex-wrap gap-2 mb-2"></div>
+                <label class="form-label">Добави още снимки</label>
+                <div id="uploader"></div>
+              </div>
+            </div>
+            <div class="d-flex gap-2 mt-4">
+              <button class="btn btn-primary" type="submit" id="submit-btn">
+                <i class="bi bi-check-circle me-1"></i>Запази промените
+              </button>
+              <a href="/dashboard.html" class="btn btn-outline-secondary">Назад</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <div id="site-footer"></div>
+    <script type="module" src="/src/pages/edit.js"></script>
+  </body>
+</html>

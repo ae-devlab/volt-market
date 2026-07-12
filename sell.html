@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Публикувай обява · VoltMarket</title>
+  </head>
+  <body>
+    <div id="site-nav"></div>
+    <main class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <h3 class="fw-bold mb-1"><i class="bi bi-plus-circle text-primary me-1"></i>Нова обява</h3>
+          <p class="text-muted">Обявата ще бъде публикувана след одобрение от администратор.</p>
+          <div id="error" class="alert alert-danger d-none" role="alert"></div>
+          <form id="listing-form" class="card card-body shadow-sm" novalidate>
+            <div class="mb-3">
+              <label class="form-label" for="title">Заглавие *</label>
+              <input type="text" id="title" class="form-control" required placeholder="напр. Tesla Model 3 Long Range 2022" />
+            </div>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label" for="category">Категория *</label>
+                <select id="category" class="form-select" required></select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="condition">Състояние</label>
+                <select id="condition" class="form-select">
+                  <option value="used">Употребяван</option>
+                  <option value="new">Нов</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="brand">Марка</label>
+                <input type="text" id="brand" class="form-control" placeholder="Tesla" />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label" for="model">Модел</label>
+                <input type="text" id="model" class="form-control" placeholder="Model 3" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="year">Година</label>
+                <input type="number" id="year" class="form-control" min="1990" max="2030" placeholder="2022" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="price">Цена (лв.) *</label>
+                <input type="number" id="price" class="form-control" min="0" required placeholder="65000" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="mileage">Пробег (км)</label>
+                <input type="number" id="mileage" class="form-control" min="0" placeholder="25000" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="battery">Батерия (kWh)</label>
+                <input type="number" id="battery" class="form-control" min="0" step="0.1" placeholder="75" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="range">Обхват (км)</label>
+                <input type="number" id="range" class="form-control" min="0" placeholder="500" />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label" for="location">Локация</label>
+                <input type="text" id="location" class="form-control" placeholder="София" />
+              </div>
+              <div class="col-12">
+                <label class="form-label" for="description">Описание</label>
+                <textarea id="description" class="form-control" rows="4" placeholder="Състояние, оборудване, история…"></textarea>
+              </div>
+              <div class="col-12">
+                <label class="form-label">Снимки</label>
+                <div id="uploader"></div>
+              </div>
+            </div>
+            <div class="d-flex gap-2 mt-4">
+              <button class="btn btn-primary" type="submit" id="submit-btn">
+                <i class="bi bi-check-circle me-1"></i>Публикувай
+              </button>
+              <a href="/dashboard.html" class="btn btn-outline-secondary">Отказ</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <div id="site-footer"></div>
+    <script type="module" src="/src/pages/sell.js"></script>
+  </body>
+</html>
