@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="bg">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вход · VoltMarket</title>
+  </head>
+  <body>
+    <div id="site-nav"></div>
+    <main class="container py-5">
+      <div class="auth-wrap">
+        <div class="card shadow-sm">
+          <div class="card-body p-4">
+            <h4 class="fw-bold mb-1"><i class="bi bi-box-arrow-in-right text-primary me-1"></i>Вход</h4>
+            <p class="text-muted small mb-4">Влез в своя VoltMarket профил.</p>
+            <div id="error" class="alert alert-danger d-none" role="alert"></div>
+            <form id="login-form" novalidate>
+              <div class="mb-3">
+                <label class="form-label" for="email">Имейл</label>
+                <input type="email" id="email" class="form-control" required autocomplete="email" />
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="password">Парола</label>
+                <input type="password" id="password" class="form-control" required autocomplete="current-password" />
+              </div>
+              <button class="btn btn-primary w-100" type="submit" id="submit-btn">Вход</button>
+            </form>
+            <p class="text-center small mt-3 mb-0">Нямаш профил? <a href="/register.html">Регистрирай се</a></p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div id="site-footer"></div>
+    <script type="module" src="/src/pages/login.js"></script>
+  </body>
+</html>
