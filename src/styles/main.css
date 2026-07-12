@@ -1,0 +1,108 @@
+:root {
+  --vm-primary: #10b981; /* electric green */
+  --vm-primary-dark: #059669;
+  --vm-accent: #0ea5e9;
+}
+
+/* Recolor Bootstrap primary to the EV green accent */
+.btn-primary {
+  --bs-btn-bg: var(--vm-primary);
+  --bs-btn-border-color: var(--vm-primary);
+  --bs-btn-hover-bg: var(--vm-primary-dark);
+  --bs-btn-hover-border-color: var(--vm-primary-dark);
+  --bs-btn-active-bg: var(--vm-primary-dark);
+  --bs-btn-disabled-bg: var(--vm-primary);
+  --bs-btn-disabled-border-color: var(--vm-primary);
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--vm-primary-dark);
+  --bs-btn-border-color: var(--vm-primary);
+  --bs-btn-hover-bg: var(--vm-primary);
+  --bs-btn-hover-border-color: var(--vm-primary);
+  --bs-btn-active-bg: var(--vm-primary-dark);
+}
+.text-primary { color: var(--vm-primary-dark) !important; }
+.link-primary { color: var(--vm-primary-dark) !important; }
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+
+/* Hero */
+.vm-hero {
+  background: linear-gradient(135deg, #0f172a 0%, #064e3b 100%);
+  color: #fff;
+}
+.vm-hero .lead {
+  color: #d1fae5;
+}
+
+/* Listing cards */
+.listing-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.listing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12) !important;
+}
+.listing-card-img {
+  height: 190px;
+  object-fit: cover;
+}
+
+/* Detail gallery */
+.gallery-main {
+  height: 420px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: 0.5rem;
+}
+.gallery-thumb {
+  width: 84px;
+  height: 64px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 0.35rem;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+.gallery-thumb:hover,
+.gallery-thumb.active {
+  opacity: 1;
+  outline: 2px solid var(--vm-primary);
+}
+
+/* Auth cards */
+.auth-wrap {
+  max-width: 440px;
+  margin-inline: auto;
+}
+
+/* Spec list on detail page */
+.spec-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--bs-border-color);
+}
+.spec-item i {
+  color: var(--vm-primary-dark);
+  font-size: 1.15rem;
+}
+
+/* Empty states */
+.empty-state {
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--bs-secondary-color);
+}
+.empty-state i {
+  font-size: 2.5rem;
+  opacity: 0.5;
+}
