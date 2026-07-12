@@ -12,9 +12,9 @@ VoltMarket е многостранично уеб приложение за **к
 
 ## 🔗 Live demo
 
-- **Live URL:** _(добавя се след deploy в Netlify)_
-- **Демо профил (купувач):** `demo@voltmarket.dev` / `demo123`
-- **Демо администратор:** `admin@voltmarket.dev` / `admin123`
+- **Live URL:** https://voltmarket-ev.netlify.app
+- **Демо профил (купувач):** `voltmarket.demo@gmail.com` / `demo123`
+- **Демо администратор:** `voltmarket.admin@gmail.com` / `admin123`
 
 ---
 
