@@ -104,6 +104,14 @@ onReady(async () => {
 
   await loadResults()
 
+  // Full reset: clear search + all filters, drop the ?q from the URL, show everything again.
+  function resetAll() {
+    qs('#search-input').value = ''
+    qs('#filters').reset()
+    if (location.search) history.replaceState(null, '', location.pathname)
+    loadResults()
+  }
+
   qs('#search-form').addEventListener('submit', (e) => {
     e.preventDefault()
     loadResults()
@@ -112,9 +120,7 @@ onReady(async () => {
     e.preventDefault()
     loadResults()
   })
-  qs('#clear-filters').addEventListener('click', () => {
-    qs('#filters').reset()
-    qs('#search-input').value = ''
-    loadResults()
-  })
+  qs('#clear-filters').addEventListener('click', resetAll)
+  const heroReset = qs('#hero-reset')
+  if (heroReset) heroReset.addEventListener('click', resetAll)
 })

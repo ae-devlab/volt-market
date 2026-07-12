@@ -244,16 +244,23 @@ h1, h2, h3, h4, h5, h6,
 }
 .search-console .form-control { background: rgba(255, 255, 255, 0.05); }
 .chip-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.chip-row { align-items: center; }
 .chip {
+  font: inherit;
   font-size: 0.8rem;
   color: var(--vm-muted);
+  background: transparent;
   border: 1px solid var(--vm-line);
   border-radius: 999px;
   padding: 0.3rem 0.8rem;
   text-decoration: none;
+  cursor: pointer;
   transition: all 0.15s ease;
 }
 .chip:hover { color: #fff; border-color: var(--vm-primary); background: rgba(52, 211, 153, 0.1); }
+.chip-label { color: var(--vm-muted); font-size: 0.78rem; }
+.chip-reset { color: var(--vm-primary); border-color: var(--vm-line-strong); }
+.chip-reset:hover { color: #fff; }
 
 /* ---------- Section headings ---------- */
 .section-title { display: flex; align-items: baseline; gap: 0.75rem; }
