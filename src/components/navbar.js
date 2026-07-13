@@ -1,6 +1,7 @@
 import { qs } from '../utils/dom.js'
 import { escapeHtml } from '../utils/dom.js'
 import { getSession, getCurrentProfile, isAdmin, logout } from '../services/auth.js'
+import { currentTheme, toggleTheme } from '../utils/theme-mode.js'
 
 const link = (href, label, icon, active) =>
   `<li class="nav-item">
@@ -36,7 +37,7 @@ function buildHtml({ session, profile, admin, active }) {
     </li>`
 
   return `
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+  <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
     <div class="container">
       <a class="navbar-brand fw-bold" href="/index.html">
         <i class="bi bi-lightning-charge-fill text-warning"></i> Volt<span class="text-primary">Market</span>
@@ -49,7 +50,12 @@ function buildHtml({ session, profile, admin, active }) {
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           ${link('/index.html', 'Обяви', 'bi-grid-3x3-gap', active === 'home')}
         </ul>
-        <ul class="navbar-nav align-items-lg-center">
+        <ul class="navbar-nav align-items-lg-center gap-2 gap-lg-1">
+          <li class="nav-item d-flex align-items-center">
+            <button type="button" id="theme-toggle" class="nav-icon-btn" title="Смени темата" aria-label="Смени светла/тъмна тема">
+              <i class="bi" id="theme-icon"></i>
+            </button>
+          </li>
           ${session ? userMenu : guestLinks}
         </ul>
       </div>
@@ -81,6 +87,19 @@ export async function renderNavbar(active = '') {
       event.preventDefault()
       await logout()
       location.href = '/index.html'
+    })
+  }
+
+  const themeBtn = qs('#theme-toggle', mount)
+  const syncThemeIcon = () => {
+    const icon = qs('#theme-icon', mount)
+    if (icon) icon.className = `bi ${currentTheme() === 'dark' ? 'bi-moon-stars' : 'bi-sun-fill'}`
+  }
+  syncThemeIcon()
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      toggleTheme()
+      syncThemeIcon()
     })
   }
 }
